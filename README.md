@@ -1,2 +1,2 @@
-# ICHE_analysis
-Data and R code for ICHE review paper
+# ICHE analysis
+Data and R code for Infection Control & Hospital Epidemiology (ICHE) review paper
