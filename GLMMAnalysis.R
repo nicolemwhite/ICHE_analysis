@@ -19,7 +19,6 @@ data$TimeFromStart_Control_scaled<-data$TimeFromStart_Control/10
 #Null
 glmm.fit.0<-glmer(cbind(Clean_N, NotClean_N) ~ (1 | Site),data=data, family=binomial('logit'))
 
-
 #Model 1: Binary intevention switch
 glmm.fit.1<-glmer(cbind(Clean_N, NotClean_N) ~ Period + (1 | Site),data=data, family=binomial('logit'))
 
@@ -33,7 +32,7 @@ glmm.fit.3<-glmer(cbind(Clean_N, NotClean_N) ~ Period + TimeFromStart_Int_scaled
 AIC.1<-extractAIC(glmm.fit.1)
 AIC.2<-extractAIC(glmm.fit.2)
 AIC.3<-extractAIC(glmm.fit.3)
-AIC.tab<-c(AIC.1,AIC.2,AIC.3)
+AIC.tab<-rbind(AIC.1,AIC.2,AIC.3)
 
 ############################################################
 #For best fitting model based on AIC, review deviance residuals for patterns/unexpected trends
@@ -44,7 +43,7 @@ data$fit<-predict(glmm.fit.3,type='response')
 ggplot(data,aes(x=fit,y=res,group=Site))+geom_point()+facet_wrap(~Site,scales='free')
 
 #boxplots
-ggplot(data,aes(x=Site,y=res))+geom_boxplot()+geom_jitter()
+ggplot(data,aes(x=factor(Site),y=res))+xlab('Site')+ylab('Deviance residual')+geom_boxplot()+geom_jitter(width=0.1)
 
 ############################################################
 #Compared observed with predicted cleaning performance using simulation
@@ -117,5 +116,6 @@ alt_glmm<-merge(alt.est_glmm,alt.se_glmm,by=c('Site','Effect'))
 #plot
 ggplot(subset(alt_glmm,Effect!='(Intercept)'),aes(x=factor(Site),y=Estimate,group=Effect,ymin=Estimate-1.96*SE,ymax=Estimate+1.96*SE))+
   geom_point()+geom_errorbar()+facet_wrap(~Effect,scales='free')+
+  xlab('Site')+
   g.theme+theme(strip.background = element_rect(fill='white'))
 
