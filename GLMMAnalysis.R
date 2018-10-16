@@ -59,11 +59,10 @@ for (t in 1:numSims){
   sim.p[,t]<-sim.data[,2]
 }
 #assign column names
-colnames(sim.p)<-colnames(sim.iqr)<-paste0('Sim',1:numSims)
+colnames(sim.p)<-paste0('Sim',1:numSims)
 
 #join simulations with observed data summaries
 obs.data<-aggregate(Clean_N/(Clean_N+NotClean_N)~Audit_label,data=data,mean)
-obs.iqr<-aggregate(Clean_N/(Clean_N+NotClean_N)~Period,data=sim.DF,IQR)
 
 colnames(obs.data)[2]<-'Clean_p'
 ObsSim_data<-data.frame(obs.data,sim.p)
