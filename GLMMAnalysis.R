@@ -3,7 +3,11 @@ library(ggplot2)
 library(reshape2)
 library(influence.ME)
 
-data = readRDS("auditdata_all.RDS")
+
+#NB: The data currently provided in this repo are scrambled, as the original data are currently under consideration for publication in another journal
+#Analysis results will therefore differ slightly from results presented in the submitted manuscript
+
+data = readRDS("auditdata_scrambled.RDS")
 
 #define general theme elements for plotting (ggplot2)
 g.theme<-theme_bw()+theme(text=element_text(size=12),legend.position = 'bottom',legend.direction='horizontal')
