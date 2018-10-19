@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 
 # data from github ICHE_analysis/auditdata_all.RDS 
-data = readRDS("auditdata_all.RDS")
+data = readRDS("auditdata_scrambled.RDS")
 
 # make into wide
 data = mutate(data, success = Clean_N / (Clean_N + NotClean_N))
